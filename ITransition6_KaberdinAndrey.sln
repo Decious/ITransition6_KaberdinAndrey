@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaberdin_PostItNotes", "Kaberdin_PostItNotes\Kaberdin_PostItNotes.csproj", "{264C3C5A-32BB-406C-A73D-05574A8F7BD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{264C3C5A-32BB-406C-A73D-05574A8F7BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264C3C5A-32BB-406C-A73D-05574A8F7BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264C3C5A-32BB-406C-A73D-05574A8F7BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264C3C5A-32BB-406C-A73D-05574A8F7BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF17103C-11AD-4E92-B0DA-DB9A762A420A}
+	EndGlobalSection
+EndGlobal
