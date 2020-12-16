@@ -118,6 +118,12 @@ function makeStickerResizable(element) {
             bottom: true,
             right: true
         },
+        modifiers: [
+            interact.modifiers.restrictRect({
+                restriction: 'parent',
+                endOnly: false
+            })
+        ],
         onstart: blockHover,
         onmove: resizeListener,
         onend: resizeEndHandler
