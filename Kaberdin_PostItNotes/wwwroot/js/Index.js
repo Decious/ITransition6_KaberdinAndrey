@@ -277,8 +277,9 @@ function getSticker(target) {
 function getTitleElement(element) {
     if ($(element).is("[name='sticker']"))
         return $(element).children("[name='title']");
-    else
-        return $(element).siblings("[name='title']");
+    else {
+        return $(element).closest("[name='sticker']").children("[name='title']");
+    }
 }
 function getStickerElement(sticker) {
     if (!isNaN(sticker)) {
