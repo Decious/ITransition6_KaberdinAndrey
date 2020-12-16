@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>f4c4a543-a78e-4dd9-8452-e69c53806dac</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Markdown" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
