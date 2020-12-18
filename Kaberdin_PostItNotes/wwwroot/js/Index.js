@@ -57,21 +57,21 @@ function setStickerContent(sticker, content) {
     $(sticker).children("[name='content']").html(content);
 }
 
-const defaultStickerHTML = "<div name='newSticker' id='NewSticker' class='draggable resizable position-absolute sticker'>" +
+const defaultStickerHTML = "<div name='newSticker' id='NewSticker' class='draggable resizable position-absolute sticker d-flex flex-column'>" +
     "<div name = 'title' style = 'min-height:24px; min-width:150px; background-color: #DEC402'>" +
-    "<div class='row'>" +
-    "<div class='col-10'>" +
+    "<div class='row m-0'>" +
+    "<div class='col-10 p-0'>" +
     "<button class='border-0 bg-transparent' style='color:highlight' value='highlight'><i class='fas fa-square'></i></button>" +
     "<button class='border-0 bg-transparent' style='color:pink' value='pink'><i class='fas fa-square'></i></button>" +
     "<button class='border-0 bg-transparent' style='color:yellow' value='yellow'><i class='fas fa-square'></i></button>" +
     "</div>" +
-    "<div class='col-2 justify-content-end d-flex'>" +
+    "<div class='col-2 justify-content-end d-flex p-0'>" +
     "<button class='border-0 bg-transparent' style='color:snow' value='close'><i class='fa fa-window-close'></i></button>" +
     "</div>" +
     "<button class='border-0 bg-transparent' style='color:crimson; position:absolute; right:0px; top:24px;' value='edit'><i class='fa fa-edit'></i></button>" +
     "</div>" +
     "</div>" +
-    "<div name='content' class='text-wrap text-break text-truncate' style='height:100%; background-color:#FDE74C'>" +
+    "<div name='content' class='text-wrap text-break text-truncate flex-grow-1' style='height:100%; background-color:#FDE74C'>" +
     "</div>" +
     "</div>";
 
@@ -118,6 +118,12 @@ function makeStickerResizable(element) {
             bottom: true,
             right: true
         },
+        modifiers: [
+            interact.modifiers.restrictRect({
+                restriction: 'parent',
+                endOnly: false
+            })
+        ],
         onstart: blockHover,
         onmove: resizeListener,
         onend: resizeEndHandler
@@ -133,9 +139,9 @@ function resizeEndHandler(event) {
     let width = parseInt($(sticker).css("width"));
     let height = parseInt($(sticker).css("height"));
     let stickerID = $(sticker).attr('id');
-    let x = parseInt(sticker.attr('data-x'));
-    let y = parseInt(sticker.attr('data-y'));
-    connection.invoke("ResizeSticker", +stickerID, width, height,x,y);
+    let x = parseFloat(sticker.attr('data-x'));
+    let y = parseFloat(sticker.attr('data-y'));
+    connection.invoke("ResizeStickerEnd", +stickerID, width, height,x,y);
 }
 function hookUpStickerEvents(element) {
     $(element).hover(hoverListener, mouseLeaveListener);
@@ -182,6 +188,11 @@ function resizeListener(event) {
     })
 
     Object.assign(event.target.dataset, { x, y })
+    let sticker = getSticker($(event.target));
+    let width = parseInt($(sticker).css("width"));
+    let height = parseInt($(sticker).css("height"));
+    let stickerID = $(sticker).attr('id');
+    connection.invoke("ResizeSticker", +stickerID, width, height, x, y);
 }
 
 function dragMoveListener(event) {
@@ -193,16 +204,16 @@ function dragMoveListener(event) {
         = 'translate(' + x + 'px, ' + y + 'px)';
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+    let id = target.getAttribute('id');
+    connection.invoke("MoveSticker", +id, x, y);
 }
 
 function dragMoveEnd(event) {
     let target = event.target;
-    let x = parseInt(target.getAttribute('data-x'));
-    let y = parseInt(target.getAttribute('data-y'));
+    let x = parseFloat(target.getAttribute('data-x'));
+    let y = parseFloat(target.getAttribute('data-y'));
     let id = target.getAttribute('id');
-    connection.invoke("MoveSticker", +id, +x, +y).catch(function (err) {
-        return console.error(err.toString());
-    });
+    connection.invoke("MoveStickerEnd", +id, x, y);
 }
 
 function hoverListener(event) {

@@ -4,14 +4,16 @@ using Kaberdin_PostItNotes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kaberdin_PostItNotes.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201218223441_doublePrecision")]
+    partial class doublePrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,11 +37,11 @@ namespace Kaberdin_PostItNotes.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("int");
 
-                    b.Property<float?>("PositionX")
-                        .HasColumnType("real");
+                    b.Property<double?>("PositionX")
+                        .HasColumnType("float");
 
-                    b.Property<float?>("PositionY")
-                        .HasColumnType("real");
+                    b.Property<double?>("PositionY")
+                        .HasColumnType("float");
 
                     b.Property<int?>("Width")
                         .HasColumnType("int");

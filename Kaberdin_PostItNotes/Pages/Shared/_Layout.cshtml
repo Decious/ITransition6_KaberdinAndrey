@@ -8,22 +8,23 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
-<body style="background-color: #0C0F14">
-    <header>
-        <nav style="border-color: #687077 !important; background-color: #232528;" class="navbar navbar-dark border-bottom box-shadow mb-1">
+<body style="background-color: #0C0F14; height:100vh;" class="d-flex flex-column m-0">
+    <header class="d-flex">
+        <nav style="border-color: #687077 !important; background-color: #232528;" class="navbar navbar-dark border-bottom box-shadow mb-1 flex-grow-1">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Kaberdin_PostItNotes</a>
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <main role="main" style="height:80vh" class="pb-0 bg-transparent">
+    <div class="d-flex flex-grow-1">
+        <main role="main" class="p-0 bg-transparent d-flex flex-grow-1">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted" 
-    style="        
+    <footer class="d-flex border-top text-muted" 
+    style="
+        line-height:60px;
         border-color: #687077 !important;
         background-color: #232528;
         ">

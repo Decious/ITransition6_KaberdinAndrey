@@ -56,7 +56,11 @@ namespace Kaberdin_PostItNotes.Hubs
                 Clients.All.SendAsync("removeSticker", stickerID);
             }
         }
-        public async Task MoveSticker(int stickerID,int x,int y)
+        public async Task MoveSticker(int stickerID, float x, float y)
+        {
+            Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+        }
+        public async Task MoveStickerEnd(int stickerID,float x, float y)
         {
             var sticker = dbContext.Stickers.Find(stickerID);
             if (sticker != null)
@@ -65,10 +69,15 @@ namespace Kaberdin_PostItNotes.Hubs
                 sticker.PositionY = y;
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("setStickerPosition", stickerID,x,y);
+                Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
             }
         }
-        public async Task ResizeSticker(int stickerID, int width,int height,int x,int y)
+        public async Task ResizeSticker(int stickerID,int width,int height,float x, float y)
+        {
+            Clients.All.SendAsync("setStickerSize", stickerID, width, height);
+            Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+        }
+        public async Task ResizeStickerEnd(int stickerID, int width,int height, float x, float y)
         {
             var sticker = dbContext.Stickers.Find(stickerID);
             if (sticker != null)
@@ -80,7 +89,7 @@ namespace Kaberdin_PostItNotes.Hubs
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
                 Clients.All.SendAsync("setStickerSize", stickerID, width, height);
-                Clients.All.SendAsync("setStickerPosition", stickerID, sticker.PositionX, sticker.PositionY);
+                Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
             }
         }
         public async Task EditContentSticker(int stickerID, String HTML)
