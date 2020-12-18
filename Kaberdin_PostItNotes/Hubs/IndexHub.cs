@@ -58,7 +58,7 @@ namespace Kaberdin_PostItNotes.Hubs
         }
         public async Task MoveSticker(int stickerID, float x, float y)
         {
-            Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
         }
         public async Task MoveStickerEnd(int stickerID,float x, float y)
         {
@@ -74,8 +74,8 @@ namespace Kaberdin_PostItNotes.Hubs
         }
         public async Task ResizeSticker(int stickerID,int width,int height,float x, float y)
         {
-            Clients.All.SendAsync("setStickerSize", stickerID, width, height);
-            Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerSize", stickerID, width, height);
+            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
         }
         public async Task ResizeStickerEnd(int stickerID, int width,int height, float x, float y)
         {
