@@ -33,7 +33,7 @@ namespace Kaberdin_PostItNotes.Hubs
             };
             dbContext.Stickers.Add(newSticker);
             await dbContext.SaveChangesAsync();
-            Clients.All.SendAsync("addSticker", newSticker.StickerId);
+            _ = Clients.All.SendAsync("addSticker", newSticker.StickerId);
         }
         public async Task EditStickerColor(int stickerID,StickerColor color)
         {
@@ -43,7 +43,7 @@ namespace Kaberdin_PostItNotes.Hubs
                 sticker.Color = color;
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("setStickerColor", sticker.StickerId,sticker.Color);
+                _ = Clients.All.SendAsync("setStickerColor", sticker.StickerId,sticker.Color);
             }
         }
         public async Task RemoveSticker(int stickerID)
@@ -53,12 +53,12 @@ namespace Kaberdin_PostItNotes.Hubs
             {
                 dbContext.Remove(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("removeSticker", stickerID);
+                _ = Clients.All.SendAsync("removeSticker", stickerID);
             }
         }
         public async Task MoveSticker(int stickerID, float x, float y)
         {
-            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
+            _ = Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
         }
         public async Task MoveStickerEnd(int stickerID,float x, float y)
         {
@@ -69,13 +69,13 @@ namespace Kaberdin_PostItNotes.Hubs
                 sticker.PositionY = y;
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+                _ = Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
             }
         }
         public async Task ResizeSticker(int stickerID,int width,int height,float x, float y)
         {
-            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerSize", stickerID, width, height);
-            Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
+            _ = Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerSize", stickerID, width, height);
+            _ = Clients.AllExcept(Context.ConnectionId).SendAsync("setStickerPosition", stickerID, x, y);
         }
         public async Task ResizeStickerEnd(int stickerID, int width,int height, float x, float y)
         {
@@ -88,8 +88,8 @@ namespace Kaberdin_PostItNotes.Hubs
                 sticker.PositionY = y;
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("setStickerSize", stickerID, width, height);
-                Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
+                _ = Clients.All.SendAsync("setStickerSize", stickerID, width, height);
+                _ = Clients.All.SendAsync("setStickerPosition", stickerID, x, y);
             }
         }
         public async Task EditContentSticker(int stickerID, String HTML)
@@ -100,7 +100,7 @@ namespace Kaberdin_PostItNotes.Hubs
                 sticker.Content = HTML;
                 dbContext.Update(sticker);
                 await dbContext.SaveChangesAsync();
-                Clients.All.SendAsync("setStickerContent", stickerID, HTML);
+                _ = Clients.All.SendAsync("setStickerContent", stickerID, HTML);
             }
         }
 

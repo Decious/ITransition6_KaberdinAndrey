@@ -57,7 +57,7 @@ function setStickerContent(sticker, content) {
     $(sticker).children("[name='content']").html(content);
 }
 
-const defaultStickerHTML = "<div name='newSticker' id='NewSticker' class='draggable resizable position-absolute sticker d-flex flex-column'>" +
+const defaultStickerHTML = "<div name='newSticker' id='NewSticker' style='touch-action: none' class='draggable resizable position-absolute sticker d-flex flex-column'>" +
     "<div name = 'title' style = 'min-height:24px; min-width:150px; background-color: #DEC402'>" +
     "<div class='row m-0'>" +
     "<div class='col-10 p-0'>" +
